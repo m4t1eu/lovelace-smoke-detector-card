@@ -1,0 +1,6 @@
+{
+  "name": "Smoke Detector Card",
+  "filename": "smoke-detector-card.js",
+  "render_readme": true,
+  "homeassistant": "2024.8.0"
+}

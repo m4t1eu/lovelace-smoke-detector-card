@@ -1,0 +1,26 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Stamp version
+        run: sed -i "s/__VERSION__/${GITHUB_REF_NAME}/" smoke-detector-card.js
+
+      - name: Syntax check
+        run: node --check smoke-detector-card.js
+
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: smoke-detector-card.js
+          generate_release_notes: true
